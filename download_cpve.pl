@@ -12,7 +12,7 @@ my $path = 'lastSuccessfulBuild/artifact/Source/target/publish/dist/';
 my $path22 = 'lastSuccessfulBuild/artifact/';
 
 ###my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc_mari_2/contrib/cpve/";
-my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc-mari/contrib/cpve/";
+my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc/contrib/cpve/";
 
 my $version = "2.399.6";
 
@@ -39,7 +39,14 @@ my %plat_hash = (
                            "ecc_path" => "lib/linux2/x86",
                         },
 
-            "ios"   =>  {
+            "ios32"   =>  {
+                           "job" =>  "BUILD_IOS_9_0_IPAD_MARI",
+                           "cpve_gz" =>   "csf2g-cpve-darwin-arm-$version.tar.gz",
+                           "ecc_7z" =>   "lib/darwin/darwin-arm.7z",
+                           "ecc_path" => "lib/darwin/armv7",
+                        },
+
+            "ios64"   =>  {
                            "job" =>  "BUILD_IOS_9_0_64BIT_IPAD_MARI",
                            "cpve_gz" =>   "csf2g-cpve-darwin-arm64-$version.tar.gz",
                            "ecc_7z" =>   "lib/darwin/darwin-arm64.7z",
@@ -57,10 +64,11 @@ my %plat_hash = (
 
 my $tmp = $ENV{"PWD"} . "/temp/";
 
-# download
+mkdir $tmp or die $! unless -e $tmp;
+
 foreach my $plat (keys %plat_hash)
 {
-    chdir $tmp;
+    chdir $tmp or die $!;
     next if ($plat ne $arg and $arg ne "all");
     my $vv = &get_version ($plat_hash{$plat}{"job"});
 
@@ -87,6 +95,10 @@ foreach my $plat (keys %plat_hash)
         !system "mkdir lib/win32/12.0/" or die $!;
         !system "mv lib/win32/x86 lib/win32/12.0/" or die $!;
         $compress_dir = "lib/win32/12.0/";
+    }
+
+    if ($plat eq "ios32"){
+        !system "mv lib/darwin/arm lib/darwin/armv7" or die $!;
     }
 
 
