@@ -11,8 +11,8 @@ my $base_url = 'http://sea-cpve.cisco.com:8080/job/';
 my $path = 'lastSuccessfulBuild/artifact/Source/target/publish/dist/';
 my $path22 = 'lastSuccessfulBuild/artifact/';
 
-###my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc_mari_2/contrib/cpve/";
-my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc/contrib/cpve/";
+my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc_mari_2/contrib/cpve/";
+##my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc/contrib/cpve/";
 
 my $version = "2.399.6";
 
@@ -64,7 +64,10 @@ my %plat_hash = (
 
 my $tmp = $ENV{"PWD"} . "/temp/";
 
+! system "rm", "-rf", $tmp  or die $! if -e $tmp;
+
 mkdir $tmp or die $! unless -e $tmp;
+
 
 foreach my $plat (keys %plat_hash)
 {
@@ -114,7 +117,7 @@ foreach my $plat (keys %plat_hash)
 }
 
 ## replace header
-##system "/bin/cp", "include/csf/media/rtp/CPVEMedia.hpp", $ecc_dir .  "include/csf/media/rtp/CPVEMedia.hpp";
+! system "/bin/cp", "include/csf/media/rtp/CPVEMedia.hpp", $ecc_dir .  "include/csf/media/rtp/CPVEMedia.hpp" or die $!;
 
 
 sub get_version 
