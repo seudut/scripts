@@ -17,7 +17,8 @@ if ($arg eq "-c" or $arg eq "-a")
 {
     chdir $cpve_dir;
     ! system '/usr/local/bin/scons arch=x86_64  platform=darwin debug=False -j16 osxversion=10.11' or  die $!;
-    ! system '/bin/cp', "-r", "$cpve_dir/target/dist/lib/darwin/x86_64", "$ecc_dir/contrib/cpve/lib/darwin/" or die $!;
+##    ! system '/bin/cp', "-r", "$cpve_dir/target/dist/lib/darwin/x86_64", "$ecc_dir/contrib/cpve/lib/darwin/" or die $!;
+    ! system "/bin/cp -R $cpve_dir/target/dist/lib/darwin/x86_64 $ecc_dir/contrib/cpve/lib/darwin/" or die $!;
 ###    ## compress
 ###    chdir ($cpve_dir .  "target/dist/lib/darwin/");
 ###    ! system "7z", "a", "darwin-x86_64.7z", "./x86_64" or die $!;
@@ -26,13 +27,13 @@ if ($arg eq "-c" or $arg eq "-a")
 }
 
 ###! system "/bin/cp", "-R", "$cpve_dir/target/dist/include/*", "$ecc_dir/contrib/cpve/include/*" or die $!;
-! system "/bin/cp -R $cpve_dir/target/dist/include/* $ecc_dir/contrib/cpve/include/*" or die $!;
+###! system "/bin/cp -R $cpve_dir/target/dist/include/* $ecc_dir/contrib/cpve/include/*" or die $!;
 
 if ($arg eq "-e" or $arg eq "-a")
 {
     ## build ecc
     chdir $ecc_dir;
-    ! system '/usr/bin/python runSconsBuild.py JabberMac64Bit -t no -j16 --nofetch ' or die $!;
+    ! system '/usr/bin/python runSconsBuild.py JabberMac64Bit -t no -j16 --nofetch release' or die $!;
 }
 
 
