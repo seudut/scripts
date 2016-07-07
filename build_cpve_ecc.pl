@@ -27,7 +27,7 @@ if ($arg eq "-c" or $arg eq "-a")
 }
 
 ###! system "/bin/cp", "-R", "$cpve_dir/target/dist/include/*", "$ecc_dir/contrib/cpve/include/*" or die $!;
-###! system "/bin/cp -R $cpve_dir/target/dist/include/* $ecc_dir/contrib/cpve/include/*" or die $!;
+! system "/bin/cp -R $cpve_dir/target/dist/include/* $ecc_dir/contrib/cpve/include/*" or die $!;
 
 if ($arg eq "-e" or $arg eq "-a")
 {
