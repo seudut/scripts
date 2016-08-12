@@ -5,17 +5,15 @@
 
 * Perl One Line Command
 
-1. use as =grep=
+1. Used as =grep=
 #+BEGIN_SRC sh
   perl -ne 'print if /expression/' xxx.log;
 #+END_SRC
 
-#+RESULTS:
 
-2. use as =awk=
+2. Used as =awk=
 #+BEGIN_SRC sh
   perl -ne 'print "$1\n" if /aaa=(\d+)\s.*/' xxx.log;
 #+END_SRC
 
-#+RESULTS:
 
