@@ -10,7 +10,7 @@ my $arg = '-a';
 $arg = shift (@ARGV) if (@ARGV > 0);
 
 my $ecc_dir = $ENV{'HOME'} . "/JCC/ecc/";
-my $cpve_dir = $ENV{'HOME'} . "/CPVE/cpve/";
+my $cpve_dir = $ENV{'HOME'} . "/CPVE/cpve_22/";
 
 ## build cpve
 if ($arg eq "-c" or $arg eq "-a")

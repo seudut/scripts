@@ -16,4 +16,9 @@
   perl -ne 'print "$1\n" if /aaa=(\d+)\s.*/' xxx.log;
 #+END_SRC
 
+3.
+#+BEGIN_SRC sh
+  perl -pe 'some code' < input.txt > output.txt
+#+END_SRC
+
 
