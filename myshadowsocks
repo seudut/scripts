@@ -1,0 +1,34 @@
+#!/bin/sh /etc/rc.common
+
+# http://liangpir.com/post/2016-01-21
+# shadowsocks for xiaomi router
+
+. /lib/functions.sh
+
+START=95
+
+SS_REDIR_PID_FILE=/var/run/ss-redir.pid
+SS_TUNNEL_PID_FILE=/var/run/ss-tunnel.pid
+CONFIG=/etc/shadowsocks.json
+DNS=8.8.8.8:53
+TUNNEL_PORT=5353
+
+start() {
+    # Client Mode
+    #service_start /usr/bin/ss-local -c $CONFIG -b 0.0.0.0 -f $SERVICE_PID_FILE
+    # Proxy Mode
+    service_start /usr/bin/ss-redir -c $CONFIG -b 0.0.0.0 -f $SS_REDIR_PID_FILE
+    # Tunnel
+    service_start /usr/bin/ss-tunnel -c $CONFIG -b 0.0.0.0 -u -l $TUNNEL_PORT -L $DNS -f $SS_TUNNEL_PID_FILE
+}
+
+stop() {
+    # Client Mode
+    #service_stop /usr/bin/ss-local
+    # Proxy Mode
+    service_stop /usr/bin/ss-redir
+    # Tunnel
+    service_stop /usr/bin/ss-tunnel
+}
+    ```
+以上的脚本会启动两个服务，一个ss-redir代理，一个ss-tunnel, 这里完全用做DNS解析
